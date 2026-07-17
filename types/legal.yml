@@ -9,7 +9,7 @@
 - name: Clause
   visibility: internal
   userAnchor: false
-  description: "A contract clause extracted from one of YOUR ingested documents, typed by CUAD category. Reach it ONLY from a bound Document via HAS_CLAUSES — e.g. MATCH (d:Document …)-[:HAS_CLAUSES]->(c:Clause) RETURN c.category, c.text. Filter with c.category (e.g. 'Cap On Liability', 'Renewal Term', 'Governing Law', 'License Grant', 'Parties'). To SUMMARIZE clauses, aggregate over c.text — never over document metadata."
+  description: "A contract clause extracted from one of YOUR ingested documents, typed by CUAD category. Reach it ONLY from a bound Document via HAS_CLAUSES — e.g. MATCH (d:Document …)-[:HAS_CLAUSES]->(c:Clause) RETURN c.category, c.text. Filter with c.category (e.g. 'Cap On Liability', 'Renewal Term', 'Governing Law', 'License Grant', 'Parties'). A clause CITING another section of the same contract carries a real (c1)-[:REFERS_TO]->(c2) edge to the cited sibling — traverse it for 'what does the section cited by X say'. To SUMMARIZE clauses, aggregate over c.text — never over document metadata."
   virtualJoins:
     - anchorLabel: Document
       relationship: HAS_CLAUSES

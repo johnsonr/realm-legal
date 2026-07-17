@@ -60,4 +60,11 @@
       reorder, or reword a category name (write 'Cap On Liability', never 'Liability Cap' or
       'Liability'; write 'Termination For Convenience', never 'Termination'). A clause that fits
       no listed category should be skipped.
+  # Citations become REAL edges: a clause whose `references` names a sibling's `section` commits
+  # (citing)-[:REFERS_TO]->(cited) alongside the rows — document-local by construction, traversable
+  # in Cypher, rebuilt with the rows when the document changes.
+  links:
+    - relationship: REFERS_TO
+      fromField: references
+      toField: section
   cache: { kind: graph }
