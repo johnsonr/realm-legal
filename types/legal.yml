@@ -60,12 +60,14 @@
         MATCH (d)-[:HAS_CLAUSES]->(c:Clause)
         WHERE size(c.references) >= 2
         RETURN d.title AS contract, c
-    # When the user NAMES a document ("my acme agreement"), select it by its title METADATA —
-    # content relevance would also match siblings that merely mention the name, and their
+    # When the user NAMES a document ("my acme agreement"), select it by its identifying METADATA —
+    # title OR source_name (the filename the user uploaded; an extracted title is often generic
+    # boilerplate like 'SERVICES AND HOSTING AGREEMENT' that does not carry the party name the user
+    # asks by). Content relevance would also match siblings that merely mention the name, and their
     # clauses would leak into the answer.
     - q: "what is the governing law of my acme hosting agreement?"
       cypher: |
-        MATCH (d:Document) WHERE toLower(d.title) CONTAINS 'acme'
+        MATCH (d:Document) WHERE toLower(d.title) CONTAINS 'acme' OR toLower(d.source_name) CONTAINS 'acme'
         MATCH (d)-[:HAS_CLAUSES]->(c:Clause)
         WHERE c.category = 'Governing Law'
         RETURN d.title AS contract, c.text AS clause
