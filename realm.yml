@@ -1,4 +1,4 @@
-name: pack-legal
+name: realm-legal
 description: >
   Legal document intelligence: typed, graph-cached clause extraction over ingested contracts —
   (d:Document)-[:HAS_CLAUSES]->(c:Clause) — with a clause vocabulary drawn from CUAD's 41
@@ -6,7 +6,7 @@ description: >
   clause rows, extracted once per document and served from the graph thereafter.
 version: 0.1.0
 author: Embabel
-url: https://github.com/johnsonr/pack-legal
+url: https://github.com/johnsonr/realm-legal
 tags:
   - legal
   - contracts
