@@ -1,4 +1,4 @@
-# pack-legal
+# realm-legal
 
 Legal document intelligence for Embabel Me: **typed, graph-cached clause extraction** over ingested
 contracts.
@@ -81,7 +81,7 @@ Or just ask in chat — the few-shot examples in `types/legal.yml` teach the gen
 - **Honest-empty**: a document with no recognizable clauses yields no rows — never fabricated ones.
 - **Composes with the whole engine**: relevance chains (`RELEVANT_TO → HAS_CLAUSES`), parallel joins
   (`HAS_CLAUSES` + `HAS_SUMMARY` off one document), inline aggregation (`summarize(c.text, '…')` —
-  "summarize the termination clauses"), subjective filtering (`WHERE c.ai_relevant = '…'`), and the
+  "summarize the termination clauses"), subjective filtering (`WHERE ai.relevant(c, '…')`), and the
   demand budget (a `LIMIT 1` ask extracts only until satisfied).
 
 ## Clause vocabulary
@@ -95,7 +95,7 @@ practicing lawyers use to review contracts, and the one the extraction prompt en
 
 - `ClauseExtractionFaithfulNeo4jIT` — engine contract (faked model): typed rows, per-record graph
   cache, stale-set replacement, honest-empty, steered-transient, cross-tenant, demand budget.
-- `LegalPackFaithfulNeo4jIT` — THIS pack's YAML drives extraction end-to-end via `packDirs`.
+- `LegalPackFaithfulNeo4jIT` — THIS realm's YAML drives extraction end-to-end via `packDirs`.
 - `ClauseCombinationsFaithfulNeo4jIT` — relevance chains, clause+summary composition,
   summarize-clauses-about-X, per-document digests.
 - `ContractClausesLlmIT` (opt-in, real model) — extraction over the real Corio × Commerce One
